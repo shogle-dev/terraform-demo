@@ -3,7 +3,7 @@
 terraform {
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
+      source = "hashicorp/aws"
     }
   }
   cloud {
@@ -16,12 +16,12 @@ terraform {
 }
 
 provider "aws" {
-  region  = "us-west-2"
+  region = "us-west-2"
   assume_role {
-    duration = "1h"
+    duration     = "1h"
     session_name = "terraform-deploy"
-    role_arn = var.aws_deployment_role
-    external_id = "terraform-access-001"
+    role_arn     = var.aws_deployment_role
+    external_id  = "terraform-access-001"
   }
 }
 

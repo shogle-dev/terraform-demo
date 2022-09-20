@@ -46,7 +46,7 @@ variable "vpc_tags" {
 }
 
 variable "aws_deployment_role" {
-  description   = "Role to assume for deployment"
-  type          = string
-  default       = "arn:aws:iam::018088791414:role/terraform"
+  description = "Role to assume for deployment"
+  type        = string
+  default     = "arn:aws:iam::018088791414:role/terraform"
 }
