@@ -6,9 +6,17 @@ terraform {
       source  = "hashicorp/aws"
     }
   }
+  cloud {
+    organization = "sh-testing"
+
+    workspaces {
+      name = "terraform-git"
+    }
+  }
 }
 
 provider "aws" {
+  region  = "us-west-2"
   assume_role {
     duration = "1h"
     session_name = "terraform-deploy"
