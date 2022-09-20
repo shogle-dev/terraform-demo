@@ -12,7 +12,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@master
+      uses: hashicorp/setup-terraform@2.0.0
       with:
         # terraform_version: 0.13.0
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
