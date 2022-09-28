@@ -1,3 +1,30 @@
+# Terraform configuration
+
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+    }
+  }
+  cloud {
+    organization = "sh-testing"
+
+    workspaces {
+      name = "terraform-git"
+    }
+  }
+}
+
+provider "aws" {
+  region = var.region
+  assume_role {
+    duration     = "1h"
+    session_name = "terraform-deploy"
+    role_arn     = var.aws_deployment_role
+    external_id  = "terraform-access-001"
+  }
+}
+
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.21.0"
@@ -29,7 +56,6 @@ module "ec2_instances" {
   tags = {
     Terraform   = "true"
     Environment = "dev"
-    TEST_VAR = var.AWS_SECRET_ACCESS_KEY
   }
 }
 

@@ -18,12 +18,6 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-variable "AWS_SECRET_ACCESS_KEY" {
-  type        = string
-  description = "TEST"
-  default     = "t2.micro"
-}
-
 variable "vpc_name" {
   description = "Name of VPC"
   type        = string
