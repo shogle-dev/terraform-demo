@@ -1,30 +1,3 @@
-# Terraform configuration
-
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-    }
-  }
-  cloud {
-    organization = "sh-testing"
-
-    workspaces {
-      name = "terraform-git"
-    }
-  }
-}
-
-provider "aws" {
-  region = "us-west-2"
-  assume_role {
-    duration     = "1h"
-    session_name = "terraform-deploy"
-    role_arn     = var.aws_deployment_role
-    external_id  = "terraform-access-001"
-  }
-}
-
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.21.0"
@@ -42,30 +15,30 @@ module "vpc" {
 }
 
 module "ec2_instances" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "2.12.0"
+  source        = "terraform-aws-modules/ec2-instance/aws"
+  version       = "2.12.0"
+  instance_type = var.instance_type
 
-  name           = "my-ec2-cluster"
+  name           = "my-ec2-cluster-${var.infra_env}"
   instance_count = 2
 
   ami                    = "ami-0c5204531f799e0c6"
-  instance_type          = "t2.micro"
   vpc_security_group_ids = [module.vpc.default_security_group_id]
   subnet_id              = module.vpc.public_subnets[0]
 
   tags = {
     Terraform   = "true"
-    Environment = "dev"
+    Environment = var.infra_env
   }
 }
 
 module "website_s3_bucket" {
   source = "./modules/aws-s3-static-website-bucket"
 
-  bucket_name = "terraform-demo-20220920"
+  bucket_name = "${var.bucket}_${var.infra_env}"
 
   tags = {
     Terraform   = "true"
-    Environment = "dev"
+    Environment = var.infra_env
   }
 }
