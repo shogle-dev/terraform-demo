@@ -3,7 +3,7 @@
 variable "infra_env" {
   type        = string
   description = "infrastructure environment"
-  default     = "prod"
+  # default     = "prod"
 }
 
 variable "region" {
@@ -18,11 +18,16 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-variable "AWS_SECRET_ACCESS_KEY" {
+variable "bucket" {
   type        = string
-  description = "TEST"
-  default     = "t2.micro"
+  description = "Bucket name without env suffix"
 }
+
+# variable "AWS_SECRET_ACCESS_KEY" {
+#   type        = string
+#   description = "TEST"
+#   default     = "t2.micro"
+# }
 
 variable "vpc_name" {
   description = "Name of VPC"
