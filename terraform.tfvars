@@ -1,3 +1,3 @@
 region        = "us-west-2"
-infra_env     = "dev"
-instance_type = "t2.large"
+instance_type = "t2.small"
+bucket        = "terraform-demo-20220920"

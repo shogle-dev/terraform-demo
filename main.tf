@@ -28,17 +28,17 @@ module "ec2_instances" {
 
   tags = {
     Terraform   = "true"
-    Environment = "dev"
+    Environment = var.infra_env
   }
 }
 
 module "website_s3_bucket" {
   source = "./modules/aws-s3-static-website-bucket"
 
-  bucket_name = "terraform-demo-20220920"
+  bucket_name = "${var.bucket}_${var.infra_env}"
 
   tags = {
     Terraform   = "true"
-    Environment = "dev"
+    Environment = var.infra_env
   }
 }
