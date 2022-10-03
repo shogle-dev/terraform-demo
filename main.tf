@@ -35,7 +35,7 @@ module "ec2_instances" {
 module "website_s3_bucket" {
   source = "./modules/aws-s3-static-website-bucket"
 
-  bucket_name = "${var.bucket}_${var.infra_env}"
+  bucket_name = "${var.bucket}-${var.infra_env}"
 
   tags = {
     Terraform   = "true"
