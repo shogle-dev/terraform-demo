@@ -3,7 +3,7 @@
 variable "infra_env" {
   type        = string
   description = "infrastructure environment"
-  # default     = "prod"
+  default     = "prod"
 }
 
 variable "region" {
