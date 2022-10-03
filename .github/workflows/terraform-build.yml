@@ -1,4 +1,5 @@
 name: 'Terraform'
+# variables:
 on:
   push:
     branches:
@@ -59,8 +60,35 @@ jobs:
             body: output
           })
     - name: Terraform Plan Status
+      env:
+          - '_ENV=$_ENV' 
+      dir: environments/$_ENV
       if: steps.plan.outcome == 'failure'
       run: exit 1
     - name: Terraform Apply
+      env:
+          - '_ENV=$_ENV' 
+      dir: environments/$_ENV
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
+ 
+dir: terraform/environments/$_ENV
+
+[9/20 1:14 PM] Siddharth Suri
+steps:
+  - name: hashicorp/terraform
+    env: 
+    - '_ENV=$_ENV'  
+    
+    args: ['init']
+  - name: hashicorp/terraform
+    env: 
+    - '_ENV=$_ENV'    
+    dir: terraform/environments/$_ENV
+    args: ['plan','-out=terraform.tfplan']
+  - name: hashicorp/terraform
+    env: 
+    - '_ENV=$_ENV'    
+    dir: terraform/environments/$_ENV
+    args: ['apply','-auto-approve']
+

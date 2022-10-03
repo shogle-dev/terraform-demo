@@ -1,5 +1,29 @@
 # Input variable definitions
 
+variable "infra_env" {
+  type        = string
+  description = "infrastructure environment"
+  default     = "prod"
+}
+
+variable "region" {
+  type        = string
+  description = "AWS Region"
+  default     = "us-east-1"
+}
+
+variable "instance_type" {
+  type        = string
+  description = "EC2 Instance Size"
+  default     = "t2.micro"
+}
+
+variable "AWS_SECRET_ACCESS_KEY" {
+  type        = string
+  description = "TEST"
+  default     = "t2.micro"
+}
+
 variable "vpc_name" {
   description = "Name of VPC"
   type        = string
