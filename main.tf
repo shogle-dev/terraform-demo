@@ -15,9 +15,9 @@ module "vpc" {
 }
 
 module "ec2_instances" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "2.12.0"
-  instance_type          = var.instance_type
+  source        = "terraform-aws-modules/ec2-instance/aws"
+  version       = "2.12.0"
+  instance_type = var.instance_type
 
   name           = "my-ec2-cluster-${var.infra_env}"
   instance_count = 2
